@@ -18,7 +18,7 @@ Esse projeto utiliza a versão 9 do Laravel e a versão 3 do VueJS, então é ne
 - XML PHP Extension
 
 Com o ambiente pronto, você já pode instalar o projeto:
-- Clone o repositório do projeto executando o comando `git clone git@github.com:martinsbiel/library.git`
+- Clone o repositório do projeto executando o comando `git clone https://github.com/martinsbiel/library.git`
 - Entre na pasta do projeto
 - Edite o arquivo `.env.example` com as suas credenciais do banco de dados e então renomeie para `.env`
 - Execute `composer install` para instalar as dependências do PHP
