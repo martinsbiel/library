@@ -19,7 +19,7 @@
                                     <td>{{ item.columns.name }}</td>
                                     <td>{{ item.columns.author }}</td>
                                     <td>{{ item.columns.status == 0 ? 'Emprestado' : 'Disponível' }}</td>
-                                    <td>{{ item.raw.genre.name }}</td>
+                                    <td>{{ item.raw.genre === null ? '-' : item.raw.genre.name }}</td>
                                     <td>{{ item.columns.created_at }}</td>
                                     <td>{{ item.columns.updated_at }}</td>
                                     <td>

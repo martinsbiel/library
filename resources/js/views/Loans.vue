@@ -17,8 +17,8 @@
                                 <tr>
                                     <td>{{ item.columns.id }}</td>
                                     <td>{{ item.columns.target_date }}</td>
-                                    <td>{{ item.raw.user.name }}</td>
-                                    <td>{{ item.raw.book.name }}</td>
+                                    <td>{{ item.raw.user === null ? '-' : item.raw.user.name }}</td>
+                                    <td>{{ item.raw.book === null ? '-' : item.raw.book.name }}</td>
                                     <td>{{ item.columns.delayed ? 'Atrasado' : 'Em dia' }}</td>
                                     <td>{{ item.columns.returned ? 'Devolvido' : 'Emprestado' }}</td>
                                     <td>{{ item.columns.created_at }}</td>
@@ -29,7 +29,7 @@
                                             data-bs-target="#modalLoanSetStatus"
                                             icon="mdi-check"
                                             size="large"
-                                            @click="$store.dispatch('saveItem', item.raw);setBook(item.raw.book.name);setUser(item.raw.user.name);"
+                                            @click="$store.dispatch('saveItem', item.raw);setBook(item.raw.book === null ? '-' : item.raw.book.name);setUser(item.raw.user === null ? '-' : item.raw.user.name);"
                                         />
                                         &nbsp;
                                         <v-icon
@@ -38,7 +38,7 @@
                                             data-bs-target="#modalLoanSetStatus"
                                             icon="mdi-calendar"
                                             size="large"
-                                            @click="$store.dispatch('saveItem', item.raw);setBook(item.raw.book.name);setUser(item.raw.user.name);"
+                                            @click="$store.dispatch('saveItem', item.raw);setBook(item.raw.book === null ? '-' : item.raw.book.name);setUser(item.raw.user === null ? '-' : item.raw.user.name);"
                                         />
                                     </td>
                                 </tr>
@@ -190,7 +190,9 @@
                 let formData = new FormData();
                 formData.append('_method', 'patch');
 
-                axios.post(this.url + '/set-return/' + this.$store.state.item.book.id, formData)
+                const bookId = this.$store.state.item.book === null ? -1 : this.$store.state.item.book.id;
+
+                axios.post(this.url + '/set-return/' + bookId, formData)
                     .then(response => {
                         toastr.success('Livro devolvido com sucesso.');
 
@@ -207,7 +209,7 @@
                 let formData = new FormData();
                 formData.append('_method', 'patch');
 
-                axios.post(this.url + '/set-delay/' + this.$store.state.item.book.id, formData)
+                axios.post(this.url + '/set-delay/' + this.$store.state.item.id, formData)
                     .then(response => {
                         toastr.success('Empréstimo marcado como atrasado.');
 
