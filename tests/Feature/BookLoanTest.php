@@ -66,7 +66,7 @@ class BookLoanTest extends TestCase
         $book = Book::factory()->create();
         $loan = BookLoan::factory()->create();
 
-        $response = $this->patchJson(route('loans.set-returned', ['id' => $book->id]));
+        $response = $this->patchJson(route('loans.set-returned', ['id' => $loan->id]));
         $response->assertStatus(200);
         
         $response->assertJsonStructure([
@@ -81,7 +81,7 @@ class BookLoanTest extends TestCase
         $book = Book::factory()->create();
         $loan = BookLoan::factory()->create();
 
-        $response = $this->patchJson(route('loans.set-delayed', ['id' => $book->id]));
+        $response = $this->patchJson(route('loans.set-delayed', ['id' => $loan->id]));
         $response->assertStatus(200);
         
         $response->assertJsonStructure([
