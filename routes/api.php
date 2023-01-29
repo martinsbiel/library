@@ -29,6 +29,6 @@ Route::prefix('v1')->group(function(){
 
     Route::get('loans', [BookLoanController::class, 'index'])->name('loans.index');
     Route::post('loans', [BookLoanController::class, 'store'])->name('loans.store');
-    Route::patch('loans/set-return/{id}', [BookLoanController::class, 'setBookReturn'])->name('loans.set-returned');
-    Route::patch('loans/set-delay/{id}', [BookLoanController::class, 'setLoanDelayed'])->name('loans.set-delayed');
+    Route::patch('loans/set-returned/{id}', [BookLoanController::class, 'setBookReturn'])->name('loans.set-returned');
+    Route::patch('loans/set-delayed/{id}', [BookLoanController::class, 'setLoanDelayed'])->name('loans.set-delayed');
 });

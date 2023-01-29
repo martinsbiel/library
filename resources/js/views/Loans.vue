@@ -190,7 +190,7 @@
                 let formData = new FormData();
                 formData.append('_method', 'patch');
 
-                axios.post(this.url + '/set-return/' + this.$store.state.item.id, formData)
+                axios.post(this.url + '/set-returned/' + this.$store.state.item.id, formData)
                     .then(response => {
                         toastr.success('Livro devolvido com sucesso.');
 
@@ -207,7 +207,7 @@
                 let formData = new FormData();
                 formData.append('_method', 'patch');
 
-                axios.post(this.url + '/set-delay/' + this.$store.state.item.id, formData)
+                axios.post(this.url + '/set-delayed/' + this.$store.state.item.id, formData)
                     .then(response => {
                         toastr.success('Empréstimo marcado como atrasado.');
 
