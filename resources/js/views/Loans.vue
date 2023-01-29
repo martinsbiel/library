@@ -190,9 +190,7 @@
                 let formData = new FormData();
                 formData.append('_method', 'patch');
 
-                const bookId = this.$store.state.item.book === null ? -1 : this.$store.state.item.book.id;
-
-                axios.post(this.url + '/set-return/' + bookId, formData)
+                axios.post(this.url + '/set-return/' + this.$store.state.item.id, formData)
                     .then(response => {
                         toastr.success('Livro devolvido com sucesso.');
 

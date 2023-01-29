@@ -46,15 +46,23 @@ class BookLoanRepository implements BookLoanRepositoryInterface
         return $loan;
     }
 
-    public function setBookReturned($bookId)
+    public function setBookReturned($loanId)
     {
-        $loan = $this->loan->where('book_id', $bookId)->update(['returned' => true]);
-        
+        $loan = $this->loan->find($loanId);
+
         if(!$loan){
             throw new \Exception('Nenhum empréstimo encontrado.', 404);
         }
 
+        $loan->update(['returned' => true]);
+
+        $bookId = $loan->book_id;
+
         $book = $this->book->find($bookId);
+
+        if(!$book){
+            throw new \Exception('Nenhum livro encontrado.', 404);
+        }
         
         $book->update([
             'status' => true
