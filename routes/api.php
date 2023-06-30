@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookLoanController;
 use App\Http\Controllers\GenreController;
@@ -26,6 +27,7 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('users', UserController::class);
     Route::apiResource('genres', GenreController::class);
     Route::apiResource('books', BookController::class);
+    Route::apiResource('admins', AdminController::class);
 
     Route::get('loans', [BookLoanController::class, 'index'])->name('loans.index');
     Route::post('loans', [BookLoanController::class, 'store'])->name('loans.store');
