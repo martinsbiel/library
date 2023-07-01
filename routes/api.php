@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookLoanController;
 use App\Http\Controllers\GenreController;
@@ -24,13 +25,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function(){
-    Route::apiResource('users', UserController::class);
-    Route::apiResource('genres', GenreController::class);
-    Route::apiResource('books', BookController::class);
-    Route::apiResource('admins', AdminController::class);
-
-    Route::get('loans', [BookLoanController::class, 'index'])->name('loans.index');
-    Route::post('loans', [BookLoanController::class, 'store'])->name('loans.store');
-    Route::patch('loans/set-returned/{id}', [BookLoanController::class, 'setBookReturn'])->name('loans.set-returned');
-    Route::patch('loans/set-delayed/{id}', [BookLoanController::class, 'setLoanDelayed'])->name('loans.set-delayed');
+    Route::middleware('auth:sanctum')->group(function(){
+        Route::apiResource('users', UserController::class);
+        Route::apiResource('genres', GenreController::class);
+        Route::apiResource('books', BookController::class);
+        Route::apiResource('admins', AdminController::class);
+    
+        Route::get('loans', [BookLoanController::class, 'index'])->name('loans.index');
+        Route::post('loans', [BookLoanController::class, 'store'])->name('loans.store');
+        Route::patch('loans/set-returned/{id}', [BookLoanController::class, 'setBookReturn'])->name('loans.set-returned');
+        Route::patch('loans/set-delayed/{id}', [BookLoanController::class, 'setLoanDelayed'])->name('loans.set-delayed');
+    
+        Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout');
+    });
+    
+    Route::post('login', [AuthController::class, 'login'])->name('auth.login');
 });
