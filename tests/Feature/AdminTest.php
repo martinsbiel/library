@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class AdminTest extends TestCase
@@ -13,6 +14,11 @@ class AdminTest extends TestCase
 
     public function test_admin_can_be_created()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+
         $data = [
             'name' => 'Gabriel',
             'email' => 'gabriel@email.com',
@@ -31,6 +37,11 @@ class AdminTest extends TestCase
 
     public function test_admins_can_be_listed()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+
         $admins = Admin::factory(10)->create();
 
         $response = $this->getJson(route('admins.index'));
@@ -50,6 +61,11 @@ class AdminTest extends TestCase
 
     public function test_admin_can_be_selected()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+        
         $admin = Admin::factory()->create();
 
         $response = $this->getJson(route('admins.show', ['admin' => $admin->id]));
@@ -67,6 +83,11 @@ class AdminTest extends TestCase
 
     public function test_admin_can_be_deleted()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+
         $admin = Admin::factory()->create();
 
         $response = $this->deleteJson(route('admins.destroy', ['admin' => $admin->id]));
@@ -78,6 +99,11 @@ class AdminTest extends TestCase
 
     public function test_admin_can_be_updated()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+        
         $admin = Admin::factory()->create();
 
         $response = $this->patchJson(route('admins.update', ['admin' => $admin->id]), ['name' => 'Gabriel']);

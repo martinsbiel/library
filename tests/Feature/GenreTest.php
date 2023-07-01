@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\Admin;
 use App\Models\Genre;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class GenreTest extends TestCase
@@ -13,6 +15,11 @@ class GenreTest extends TestCase
 
     public function test_genre_can_be_created()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+
         $data = [
             'name' => 'Ficção'
         ];
@@ -24,6 +31,11 @@ class GenreTest extends TestCase
 
     public function test_genres_can_be_listed()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+
         $genres = Genre::factory(10)->create();
 
         $response = $this->getJson(route('genres.index'));
@@ -42,6 +54,11 @@ class GenreTest extends TestCase
 
     public function test_genre_can_be_selected()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+
         $genre = Genre::factory()->create();
 
         $response = $this->getJson(route('genres.show', ['genre' => $genre->id]));
@@ -60,6 +77,11 @@ class GenreTest extends TestCase
 
     public function test_genre_can_be_deleted()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+
         $genre = Genre::factory()->create();
 
         $response = $this->deleteJson(route('genres.destroy', ['genre' => $genre->id]));
@@ -71,6 +93,11 @@ class GenreTest extends TestCase
 
     public function test_genre_can_be_updated()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+        
         $genre = Genre::factory()->create();
 
         $response = $this->patchJson(route('genres.update', ['genre' => $genre->id]), ['name' => 'Terror']);

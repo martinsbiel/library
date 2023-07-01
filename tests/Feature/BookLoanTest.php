@@ -2,12 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Models\Admin;
 use App\Models\Book;
 use App\Models\BookLoan;
 use App\Models\Genre;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class BookLoanTest extends TestCase
@@ -16,6 +18,11 @@ class BookLoanTest extends TestCase
 
     public function test_loan_can_be_created()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+
         $user = User::factory()->create();
         $genre = Genre::factory()->create();
         $book = Book::factory()->create();
@@ -38,6 +45,11 @@ class BookLoanTest extends TestCase
 
     public function test_loans_can_be_listed()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+
         $user = User::factory()->create();
         $genre = Genre::factory()->create();
         $book = Book::factory()->create();
@@ -61,6 +73,11 @@ class BookLoanTest extends TestCase
 
     public function test_book_can_be_returned()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+
         $user = User::factory()->create();
         $genre = Genre::factory()->create();
         $book = Book::factory()->create();
@@ -76,6 +93,11 @@ class BookLoanTest extends TestCase
 
     public function test_loan_can_be_set_delayed()
     {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+        
         $user = User::factory()->create();
         $genre = Genre::factory()->create();
         $book = Book::factory()->create();
