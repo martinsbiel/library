@@ -11,22 +11,46 @@ import vuetify from './plugins/vuetify';
 import moment from 'moment';
 
 import Home from './views/Home.vue';
+import Login from './views/Login.vue';
+import Logout from './views/Logout.vue';
 import Users from './views/Users.vue';
 import Books from './views/Books.vue';
 import Genres from './views/Genres.vue';
 import Loans from './views/Loans.vue';
 
 const routes = [
-    { path: '/', component: Home },
-    { path: '/users', component: Users },
-    { path: '/books', component: Books },
-    { path: '/genres', component: Genres },
-    { path: '/loans', component: Loans },
+    { path: '/', component: Home, meta: {
+        auth: true
+    }},
+    { path: '/login', component: Login },
+    { path: '/logout', component: Logout, meta: {
+        auth: true
+    }},
+    { path: '/users', component: Users, meta: {
+        auth: true
+    }},
+    { path: '/books', component: Books, meta: {
+        auth: true
+    }},
+    { path: '/genres', component: Genres, meta: {
+        auth: true
+    }},
+    { path: '/loans', component: Loans, meta: {
+        auth: true
+    }},
 ]
 
 const router = VueRouter.createRouter({
     history: VueRouter.createWebHashHistory(),
     routes,
+});
+
+router.beforeEach(async(to, from) => {
+    const loggedIn = store.state.isAuthenticated;
+
+    if(to.matched.some(record => record.meta.auth) && !loggedIn && to.path !== '/login'){
+        return {path: '/login'}
+    }
 });
 
 /**
@@ -44,6 +68,7 @@ import {createStore} from 'vuex';
 const store = createStore({
     state: {
         item: {},
+        isAuthenticated: false
     },
     actions: {
         saveItem(context, payload){
@@ -52,11 +77,28 @@ const store = createStore({
             item = payload;
             
             context.commit('SAVE_ITEM', item);
+        },
+        setAuthenticated(context, payload){
+            let status = context.state.isAuthenticated;
+
+            status = payload;
+
+            context.commit('SAVE_STATUS', status);
+        },
+        me({commit}){
+            return axios.get('/api/user').then(response => {
+                commit('SAVE_STATUS', true);
+            }).catch(() => {
+                commit('SAVE_STATUS', false);
+            });
         }
     },
     mutations: {
         SAVE_ITEM(state, payload){
             state.item = payload;
+        },
+        SAVE_STATUS(state, payload){
+            state.isAuthenticated = payload;
         }
     }
 });
@@ -88,4 +130,4 @@ app.component('modal-component', ModalComponent);
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-app.mount('#app');
+store.dispatch('me').then(() => app.mount('#app'));

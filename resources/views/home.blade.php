@@ -27,7 +27,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div v-if="$store.state.isAuthenticated" class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
@@ -49,7 +49,9 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        
+                        <li class="nav-item">
+                            <router-link class="nav-link link-light" to="logout">Sair</router-link>
+                        </li>
                     </ul>
                 </div>
             </div>

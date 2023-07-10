@@ -21,9 +21,26 @@ axios.interceptors.request.use(
     config => {
         config.headers.Accept = 'application/json';
 
+        let token = `Bearer ${localStorage.getItem('token')}`;
+
+        config.headers.Authorization = token;
+
         return config;
     },
     error => {
+        return Promise.reject(error);
+    }
+);
+
+// intercepting responses
+axios.interceptors.response.use(
+    response => {
+        return response;
+    },
+    error => {
+        if(error.response.status === 401){
+            this.store.dispatch('setAuthenticated', false);
+        }
         return Promise.reject(error);
     }
 );
