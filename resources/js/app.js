@@ -14,6 +14,7 @@ import Home from './views/Home.vue';
 import Login from './views/Login.vue';
 import Logout from './views/Logout.vue';
 import Users from './views/Users.vue';
+import Admins from './views/Admins.vue';
 import Books from './views/Books.vue';
 import Genres from './views/Genres.vue';
 import Loans from './views/Loans.vue';
@@ -27,6 +28,9 @@ const routes = [
         auth: true
     }},
     { path: '/users', component: Users, meta: {
+        auth: true
+    }},
+    { path: '/admins', component: Admins, meta: {
         auth: true
     }},
     { path: '/books', component: Books, meta: {

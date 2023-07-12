@@ -37,6 +37,9 @@
                             <router-link class="nav-link" to="users">Usuários</router-link>
                         </li>
                         <li class="nav-item">
+                            <router-link class="nav-link" to="admins">Administradores</router-link>
+                        </li>
+                        <li class="nav-item">
                             <router-link class="nav-link" to="books">Livros</router-link>
                         </li>
                         <li class="nav-item">
