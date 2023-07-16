@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Passwords\CanResetPassword as PasswordsCanResetPassword;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;  
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements CanResetPassword
 {
-    use HasApiTokens, HasFactory, SoftDeletes;
+    use HasApiTokens, HasFactory, SoftDeletes, Notifiable, PasswordsCanResetPassword;
 
     /**
      * The attributes that are mass assignable.

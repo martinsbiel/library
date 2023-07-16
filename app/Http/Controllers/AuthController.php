@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ResetPasswordRequest;
+use App\Http\Requests\SendPasswordResetLinkRequest;
 use App\Interfaces\AuthRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -22,7 +24,7 @@ class AuthController extends Controller
 
             return response()->json(['token' => $this->authRepository->login($credentials)], 200);
         } catch(\Exception $e){
-            return response()->json(['error' => $e->getMessage()], $e->getCode());
+            return response()->json(['errors' => [$e->getMessage()]], $e->getCode());
         }
     }
 
@@ -34,6 +36,32 @@ class AuthController extends Controller
             return response()->json(['success' => 'Logout realizado com sucesso'], 200);
         } catch(\Exception $e){
             return response()->json(['error' => $e->getMessage()], $e->getCode());
+        }
+    }
+
+    public function sendPasswordResetLink(SendPasswordResetLinkRequest $request)
+    {
+        try{
+            $validated = $request->validated();
+
+            $this->authRepository->sendPasswordResetLink($validated);
+
+            return response()->json(['success' => 'Link para recuperar senha enviado.'], 200);
+        }catch(\Exception $e){
+            return response()->json(['errors' => [$e->getMessage()]], $e->getCode());
+        }
+    }
+
+    public function resetPassword(ResetPasswordRequest $request)
+    {
+        try{
+            $validated = $request->validated();
+
+            $this->authRepository->resetPassword($validated);
+
+            return response()->json(['success' => 'Senha alterada com sucesso.'], 200);
+        }catch(\Exception $e){
+            return response()->json(['errors' => [$e->getMessage()]], $e->getCode());
         }
     }
 }

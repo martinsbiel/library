@@ -40,4 +40,6 @@ Route::prefix('v1')->group(function(){
     });
     
     Route::post('login', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('forgot-password', [AuthController::class, 'sendPasswordResetLink'])->name('auth.send-password-reset-link');
+    Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('auth.reset-password');
 });

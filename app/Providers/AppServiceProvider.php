@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Password reset link in email template...
+        ResetPassword::createUrlUsing(static function ($notifiable, $token) {
+            // Url of the fronted app for resetting password...
+            return env('APP_URL').'/reset-password/'.$token;
+        });
     }
 }
