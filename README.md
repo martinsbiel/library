@@ -24,8 +24,13 @@ Com o ambiente pronto, você já pode instalar o projeto:
 - Duplique o arquivo `.env.example`, renomeie para `.env` e edite com as suas credenciais do banco de dados
 - Execute `composer install` para instalar as dependências do PHP
 - Execute `php artisan key:generate` para gerar a chave da aplicação
-- Execute `php artisan migrate` para criar as tabelas do banco de dados
+- Execute `php artisan migrate --seed` para criar as tabelas do banco de dados e administrador padrão para primeiro acesso
 - Execute `npm install` para instalar as dependências do frontend
 - Execute `php artisan serve` para servir a aplicação
 - Execute `npm run dev` para servir o frontend
 - Acesse a aplicação pelo navegador `http://localhost:8000/`
+
+## Usuário padrão
+O usuário padrão para acesso é:
+- Email: `admin@email.com`
+- Senha: `secret`
