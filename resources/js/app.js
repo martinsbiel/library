@@ -117,8 +117,10 @@ app.config.globalProperties.$moment = moment;
 
 import ExampleComponent from './components/ExampleComponent.vue';
 import ModalComponent from './components/ModalComponent.vue';
+import HeaderComponent from './layout/Header.vue';
 app.component('example-component', ExampleComponent);
 app.component('modal-component', ModalComponent);
+app.component('header-component', HeaderComponent);
 
 /**
  * The following block of code may be used to automatically register your
