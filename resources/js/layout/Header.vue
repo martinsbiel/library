@@ -24,8 +24,15 @@
 
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <router-link class="nav-link link-light" to="logout">Sair</router-link>
+            <li class="nav-item dropdown">
+                <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ $store.state.user.name }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#">Alterar senha</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><router-link class="dropdown-item" to="logout">Sair</router-link></li>
+                </ul>
             </li>
         </ul>
     </div>

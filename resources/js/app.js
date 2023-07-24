@@ -56,6 +56,8 @@ const router = VueRouter.createRouter({
 router.beforeEach(async(to, from) => {
     const loggedIn = store.state.isAuthenticated;
 
+    store.dispatch('me');
+
     if(to.matched.some(record => record.meta.auth) && !loggedIn && to.path !== '/login'){
         return {path: '/login'}
     }
@@ -76,7 +78,8 @@ import {createStore} from 'vuex';
 const store = createStore({
     state: {
         item: {},
-        isAuthenticated: false
+        isAuthenticated: false,
+        user: []
     },
     actions: {
         saveItem(context, payload){
@@ -85,6 +88,13 @@ const store = createStore({
             item = payload;
             
             context.commit('SAVE_ITEM', item);
+        },
+        saveUser(context, payload){
+            let user = context.state.user;
+
+            user = payload;
+            
+            context.commit('SAVE_USER', user);
         },
         setAuthenticated(context, payload){
             let status = context.state.isAuthenticated;
@@ -95,6 +105,7 @@ const store = createStore({
         },
         me({commit}){
             return axios.get('/api/user').then(response => {
+                commit('SAVE_USER', response.data);
                 commit('SAVE_STATUS', true);
             }).catch(() => {
                 commit('SAVE_STATUS', false);
@@ -104,6 +115,9 @@ const store = createStore({
     mutations: {
         SAVE_ITEM(state, payload){
             state.item = payload;
+        },
+        SAVE_USER(state, payload){
+            state.user = payload;
         },
         SAVE_STATUS(state, payload){
             state.isAuthenticated = payload;
