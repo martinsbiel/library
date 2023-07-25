@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
@@ -117,5 +118,27 @@ class AdminTest extends TestCase
             'updated_at',
             'deleted_at'
         ]);
+    }
+
+    public function test_admin_can_change_password()
+    {
+        Sanctum::actingAs(
+            Admin::factory()->create(),
+            ['*']
+        );
+        
+        $admin = Admin::factory()->create([
+            'password' => Hash::make('secret')
+        ]);
+
+        $data = [
+            'password' => 'secret',
+            'new_password' => 'newsecret',
+            'new_password_confirmation' => 'newsecret'
+        ];
+
+        $response = $this->patchJson(route('admin.change-password', ['id' => $admin->id]), $data);
+        $response->assertStatus(200);
+        $response->assertJsonStructure(['success']);
     }
 }
