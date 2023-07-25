@@ -69,7 +69,7 @@ class AdminRepository implements AdminRepositoryInterface
         $admin = $this->admin->find($adminId);
 
         if(!$admin){
-            return response()->json(['error' => 'Administrador não encontrado.'], 404);
+            throw new \Exception('Administrador não encontrado.', 404);
         }
 
         $admin->update($newDetails);
@@ -82,11 +82,15 @@ class AdminRepository implements AdminRepositoryInterface
         $admin = $this->admin->find($adminId);
 
         if(!$admin){
-            return response()->json(['error' => 'Administrador não encontrado.'], 404);
+            throw new \Exception('Administrador não encontrado.', 404);
+        }
+
+        if(!Hash::check($details['password'], $admin->password)){
+            throw new \Exception('Senha incorreta.', 401);
         }
 
         $admin->update([
-            'password' => Hash::make($details['password'])
+            'password' => Hash::make($details['new_password'])
         ]);
 
         return $admin;
