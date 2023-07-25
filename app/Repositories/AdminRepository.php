@@ -76,4 +76,19 @@ class AdminRepository implements AdminRepositoryInterface
 
         return $admin;
     }
+
+    public function changePassword($adminId, array $details)
+    {
+        $admin = $this->admin->find($adminId);
+
+        if(!$admin){
+            return response()->json(['error' => 'Administrador não encontrado.'], 404);
+        }
+
+        $admin->update([
+            'password' => Hash::make($details['password'])
+        ]);
+
+        return $admin;
+    }
 }

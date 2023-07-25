@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use App\Interfaces\AdminRepositoryInterface;
@@ -91,6 +92,19 @@ class AdminController extends Controller
             $this->adminRepository->deleteAdmin($id);
 
             return response()->json(['success' => 'Administrador excluído com sucesso.'], 200);
+        }catch(\Exception $e){
+            return response()->json(['errors' => [$e->getMessage()]], $e->getCode());
+        }
+    }
+
+    public function changePassword(ChangePasswordRequest $request, $id)
+    {
+        try{
+            $validated = $request->validated();
+
+            $this->adminRepository->changePassword($id, $validated);
+
+            return response()->json(['success' => 'Senha alterada com sucesso.'], 200);
         }catch(\Exception $e){
             return response()->json(['errors' => [$e->getMessage()]], $e->getCode());
         }

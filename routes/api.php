@@ -36,6 +36,7 @@ Route::prefix('v1')->group(function(){
         Route::patch('loans/set-returned/{id}', [BookLoanController::class, 'setBookReturn'])->name('loans.set-returned');
         Route::patch('loans/set-delayed/{id}', [BookLoanController::class, 'setLoanDelayed'])->name('loans.set-delayed');
     
+        Route::post('change-password', [AdminController::class, 'changePassword'])->name('admin.change-password');
         Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout');
     });
     

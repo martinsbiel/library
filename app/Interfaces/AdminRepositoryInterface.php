@@ -9,4 +9,5 @@ interface AdminRepositoryInterface
     public function deleteAdmin($adminId);
     public function createAdmin(array $adminDetails);
     public function updateAdmin($adminId, array $newDetails);
+    public function changePassword($adminId, array $details);
 }
