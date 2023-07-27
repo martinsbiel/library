@@ -5,13 +5,14 @@ namespace App\Repositories;
 use App\Interfaces\AuthRepositoryInterface;
 use App\Models\Admin;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
 class AuthRepository implements AuthRepositoryInterface
 {
-    public function login(array $adminDetails)
+    public function login(array $adminDetails): string
     {
         $admin = Admin::where('email', $adminDetails['email'])->first();
 
@@ -22,12 +23,12 @@ class AuthRepository implements AuthRepositoryInterface
         return $admin->createToken($admin->email)->plainTextToken;
     }
 
-    public function logout($request)
+    public function logout(Request $request): bool
     {
         return $request->user()->currentAccessToken()->delete();
     }
 
-    public function sendPasswordResetLink($email)
+    public function sendPasswordResetLink(array $email): string
     {
         $admin = Admin::where('email', $email)->first();
 
@@ -40,7 +41,7 @@ class AuthRepository implements AuthRepositoryInterface
         return $status;
     }
 
-    public function resetPassword($resetDetails)
+    public function resetPassword(array $resetDetails): string
     {
         $admin = Admin::where('email', $resetDetails['email'])->first();
 

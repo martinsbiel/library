@@ -14,7 +14,7 @@ class BookTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_book_can_be_created()
+    public function test_book_can_be_created(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -41,7 +41,7 @@ class BookTest extends TestCase
         ]);
     }
 
-    public function test_books_can_be_listed()
+    public function test_books_can_be_listed(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -69,7 +69,7 @@ class BookTest extends TestCase
         ]);
     }
 
-    public function test_book_can_be_selected()
+    public function test_book_can_be_selected(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -97,7 +97,7 @@ class BookTest extends TestCase
         ]);
     }
 
-    public function test_book_can_be_deleted()
+    public function test_book_can_be_deleted(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -114,7 +114,7 @@ class BookTest extends TestCase
         ]);
     }
 
-    public function test_book_can_be_updated()
+    public function test_book_can_be_updated(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),

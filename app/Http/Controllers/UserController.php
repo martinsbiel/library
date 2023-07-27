@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Interfaces\UserRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
@@ -18,9 +19,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         try{
             return response()->json($this->userRepository->getAllUsers(), 200);
@@ -33,9 +34,9 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  App\Http\Requests\StoreUserRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreUserRequest $request): JsonResponse
     {
         try{
             $validated = $request->validated();
@@ -50,9 +51,9 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show(int $id): JsonResponse
     {
         try{
             return response()->json($this->userRepository->getUserById($id), 200);
@@ -66,9 +67,9 @@ class UserController extends Controller
      *
      * @param  App\Http\Requests\UpdateUserRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UpdateUserRequest $request, int $id): JsonResponse
     {
         try{
             $validated = $request->validated();
@@ -83,9 +84,9 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         try{
             $this->userRepository->deleteUser($id);

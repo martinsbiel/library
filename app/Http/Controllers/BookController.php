@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Interfaces\BookRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 
 class BookController extends Controller
 {
@@ -18,9 +19,9 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         try{
             return response()->json($this->bookRepository->getAllBooks(), 200);
@@ -33,9 +34,9 @@ class BookController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  App\Http\Requests\StoreBookRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreBookRequest $request)
+    public function store(StoreBookRequest $request): JsonResponse
     {
         try{
             $validated = $request->validated();
@@ -50,9 +51,9 @@ class BookController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show(int $id): JsonResponse
     {
         try{
             return response()->json($this->bookRepository->getBookById($id), 200);
@@ -66,9 +67,9 @@ class BookController extends Controller
      *
      * @param  App\Http\Requests\UpdateBookRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateBookRequest $request, $id)
+    public function update(UpdateBookRequest $request, int $id): JsonResponse
     {
         try{
             $validated = $request->validated();
@@ -83,9 +84,9 @@ class BookController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         try{
             $this->bookRepository->deleteBook($id);

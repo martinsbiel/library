@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BookLoanRequest;
 use App\Interfaces\BookLoanRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 
 class BookLoanController extends Controller
 {
@@ -17,9 +18,9 @@ class BookLoanController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         try{
             return response()->json($this->loanRepository->getAllLoans(), 200);
@@ -32,9 +33,9 @@ class BookLoanController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  App\Http\Requests\BookLoanRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(BookLoanRequest $request)
+    public function store(BookLoanRequest $request): JsonResponse
     {
         try{
             $validated = $request->validated();
@@ -45,7 +46,7 @@ class BookLoanController extends Controller
         }
     }
 
-    public function setBookReturn($id)
+    public function setBookReturn(int $id): JsonResponse
     {
         try{
             $this->loanRepository->setBookReturned($id);
@@ -56,7 +57,7 @@ class BookLoanController extends Controller
         }
     }
 
-    public function setLoanDelayed($id)
+    public function setLoanDelayed(int $id): JsonResponse
     {
         try{
             $this->loanRepository->setLoanDelayed($id);

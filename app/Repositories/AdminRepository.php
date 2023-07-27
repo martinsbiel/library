@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\AdminRepositoryInterface;
 use App\Models\Admin;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
 
 class AdminRepository implements AdminRepositoryInterface
@@ -16,7 +17,7 @@ class AdminRepository implements AdminRepositoryInterface
         $this->admin = $admin;
     }
 
-    public function getAllAdmins()
+    public function getAllAdmins(): Collection
     {
         $admins = $this->admin->get();
 
@@ -27,7 +28,7 @@ class AdminRepository implements AdminRepositoryInterface
         return $admins;
     }
 
-    public function getAdminById($adminId)
+    public function getAdminById(int $adminId): Admin
     {
         $admin = $this->admin->find($adminId);
 
@@ -38,7 +39,7 @@ class AdminRepository implements AdminRepositoryInterface
         return $admin;
     }
 
-    public function deleteAdmin($adminId)
+    public function deleteAdmin(int $adminId): Admin
     {
         $admin = $this->admin->find($adminId);
 
@@ -51,7 +52,7 @@ class AdminRepository implements AdminRepositoryInterface
         return $admin;
     }
 
-    public function createAdmin(array $adminDetails)
+    public function createAdmin(array $adminDetails): Admin
     {
         $data = [
             'name' => $adminDetails['name'],
@@ -64,7 +65,7 @@ class AdminRepository implements AdminRepositoryInterface
         return $admin;
     }
 
-    public function updateAdmin($adminId, array $newDetails)
+    public function updateAdmin(int $adminId, array $newDetails): Admin
     {
         $admin = $this->admin->find($adminId);
 
@@ -77,7 +78,7 @@ class AdminRepository implements AdminRepositoryInterface
         return $admin;
     }
 
-    public function changePassword($adminId, array $details)
+    public function changePassword(int $adminId, array $details): Admin
     {
         $admin = $this->admin->find($adminId);
 

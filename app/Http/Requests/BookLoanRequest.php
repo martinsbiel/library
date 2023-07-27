@@ -11,7 +11,7 @@ class BookLoanRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,7 +21,7 @@ class BookLoanRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'target_date' => 'required|date',
@@ -35,7 +35,7 @@ class BookLoanRequest extends FormRequest
      *
      * @return array
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'target_date.required' => 'O campo devolução é obrigatório.',

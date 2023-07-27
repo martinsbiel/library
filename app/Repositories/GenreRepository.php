@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\GenreRepositoryInterface;
 use App\Models\Genre;
+use Illuminate\Database\Eloquent\Collection;
 
 class GenreRepository implements GenreRepositoryInterface
 {
@@ -15,7 +16,7 @@ class GenreRepository implements GenreRepositoryInterface
         $this->genre = $genre;
     }
 
-    public function getAllGenres()
+    public function getAllGenres(): Collection
     {
         $genres = $this->genre->with('books')->get();
 
@@ -26,7 +27,7 @@ class GenreRepository implements GenreRepositoryInterface
         return $genres;
     }
 
-    public function getGenreById($genreId)
+    public function getGenreById(int $genreId): Collection
     {
         $genre = $this->genre->with('books')->where('id', $genreId)->get();
 
@@ -37,7 +38,7 @@ class GenreRepository implements GenreRepositoryInterface
         return $genre;
     }
 
-    public function deleteGenre($genreId)
+    public function deleteGenre(int $genreId): Genre
     {
         $genre = $this->genre->find($genreId);
 
@@ -50,14 +51,14 @@ class GenreRepository implements GenreRepositoryInterface
         return $genre;
     }
 
-    public function createGenre(array $genreDetails)
+    public function createGenre(array $genreDetails): Genre
     {
         $genre = $this->genre->create($genreDetails);
 
         return $genre;
     }
 
-    public function updateGenre($genreId, array $newDetails)
+    public function updateGenre(int $genreId, array $newDetails): Genre
     {
         $genre = $this->genre->find($genreId);
 

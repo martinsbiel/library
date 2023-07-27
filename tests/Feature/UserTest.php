@@ -13,7 +13,7 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_user_can_be_created()
+    public function test_user_can_be_created(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -30,7 +30,7 @@ class UserTest extends TestCase
         $response->assertJson($data);
     }
 
-    public function test_users_can_be_listed()
+    public function test_users_can_be_listed(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -54,7 +54,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function test_user_can_be_selected()
+    public function test_user_can_be_selected(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -78,7 +78,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function test_user_can_be_deleted()
+    public function test_user_can_be_deleted(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -94,7 +94,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function test_user_can_be_updated()
+    public function test_user_can_be_updated(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),

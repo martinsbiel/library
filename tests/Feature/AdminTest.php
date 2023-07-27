@@ -13,7 +13,7 @@ class AdminTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_admin_can_be_created()
+    public function test_admin_can_be_created(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -36,7 +36,7 @@ class AdminTest extends TestCase
         ]);
     }
 
-    public function test_admins_can_be_listed()
+    public function test_admins_can_be_listed(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -60,7 +60,7 @@ class AdminTest extends TestCase
         ]);
     }
 
-    public function test_admin_can_be_selected()
+    public function test_admin_can_be_selected(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -82,7 +82,7 @@ class AdminTest extends TestCase
         ]);
     }
 
-    public function test_admin_can_be_deleted()
+    public function test_admin_can_be_deleted(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -98,7 +98,7 @@ class AdminTest extends TestCase
         ]);
     }
 
-    public function test_admin_can_be_updated()
+    public function test_admin_can_be_updated(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -120,7 +120,7 @@ class AdminTest extends TestCase
         ]);
     }
 
-    public function test_admin_can_change_password()
+    public function test_admin_can_change_password(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),

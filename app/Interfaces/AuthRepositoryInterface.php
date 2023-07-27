@@ -2,10 +2,12 @@
 
 namespace App\Interfaces;
 
+use Illuminate\Http\Request;
+
 interface AuthRepositoryInterface 
 {
-    public function login(array $adminDetails);
-    public function logout($request);
-    public function sendPasswordResetLink($email);
-    public function resetPassword($resetDetails);
+    public function login(array $adminDetails): string;
+    public function logout(Request $request): bool;
+    public function sendPasswordResetLink(array $email): string;
+    public function resetPassword(array $resetDetails): string;
 }

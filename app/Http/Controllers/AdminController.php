@@ -6,6 +6,7 @@ use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use App\Interfaces\AdminRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 
 class AdminController extends Controller
 {
@@ -19,9 +20,9 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         try{
             return response()->json($this->adminRepository->getAllAdmins(), 200);
@@ -34,9 +35,9 @@ class AdminController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  App\Http\Requests\StoreAdminRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreAdminRequest $request)
+    public function store(StoreAdminRequest $request): JsonResponse
     {
         try{
             $validated = $request->validated();
@@ -51,9 +52,9 @@ class AdminController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show(int $id): JsonResponse
     {
         try{
             return response()->json($this->adminRepository->getAdminById($id), 200);
@@ -67,9 +68,9 @@ class AdminController extends Controller
      *
      * @param  App\Http\Requests\UpdateAdminRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateAdminRequest $request, $id)
+    public function update(UpdateAdminRequest $request, int $id): JsonResponse
     {
         try{
             $validated = $request->validated();
@@ -84,9 +85,9 @@ class AdminController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         try{
             $this->adminRepository->deleteAdmin($id);
@@ -97,7 +98,7 @@ class AdminController extends Controller
         }
     }
 
-    public function changePassword(ChangePasswordRequest $request, $id)
+    public function changePassword(ChangePasswordRequest $request, int $id): JsonResponse
     {
         try{
             $validated = $request->validated();

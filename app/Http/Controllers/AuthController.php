@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\SendPasswordResetLinkRequest;
 use App\Interfaces\AuthRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -17,7 +18,7 @@ class AuthController extends Controller
         $this->authRepository = $authRepository;
     }
 
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request): JsonResponse
     {
         try {
             $credentials = $request->validated();
@@ -28,7 +29,7 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
         try {
             $this->authRepository->logout($request);
@@ -39,7 +40,7 @@ class AuthController extends Controller
         }
     }
 
-    public function sendPasswordResetLink(SendPasswordResetLinkRequest $request)
+    public function sendPasswordResetLink(SendPasswordResetLinkRequest $request): JsonResponse
     {
         try{
             $validated = $request->validated();
@@ -52,7 +53,7 @@ class AuthController extends Controller
         }
     }
 
-    public function resetPassword(ResetPasswordRequest $request)
+    public function resetPassword(ResetPasswordRequest $request): JsonResponse
     {
         try{
             $validated = $request->validated();

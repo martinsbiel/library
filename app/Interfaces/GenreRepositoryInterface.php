@@ -2,11 +2,14 @@
 
 namespace App\Interfaces;
 
+use App\Models\Genre;
+use Illuminate\Database\Eloquent\Collection;
+
 interface GenreRepositoryInterface 
 {
-    public function getAllGenres();
-    public function getGenreById($genreId);
-    public function deleteGenre($genreId);
-    public function createGenre(array $genreDetails);
-    public function updateGenre($genreId, array $newDetails);
+    public function getAllGenres(): Collection;
+    public function getGenreById(int $genreId): Collection;
+    public function deleteGenre(int $genreId): Genre;
+    public function createGenre(array $genreDetails): Genre;
+    public function updateGenre(int $genreId, array $newDetails): Genre;
 }

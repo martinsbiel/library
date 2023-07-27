@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\BookRepositoryInterface;
 use App\Models\Book;
+use Illuminate\Database\Eloquent\Collection;
 
 class BookRepository implements BookRepositoryInterface
 {
@@ -15,7 +16,7 @@ class BookRepository implements BookRepositoryInterface
         $this->book = $book;
     }
 
-    public function getAllBooks()
+    public function getAllBooks(): Collection
     {
         $books = $this->book->with(['genre', 'loan'])->get();
 
@@ -26,7 +27,7 @@ class BookRepository implements BookRepositoryInterface
         return $books;
     }
 
-    public function getBookById($bookId)
+    public function getBookById(int $bookId): Collection
     {
         $book = $this->book->with(['genre', 'loan'])->where('id', $bookId)->get();
 
@@ -37,7 +38,7 @@ class BookRepository implements BookRepositoryInterface
         return $book;
     }
 
-    public function deleteBook($bookId)
+    public function deleteBook(int $bookId): Book
     {
         $book = $this->book->find($bookId);
 
@@ -50,14 +51,14 @@ class BookRepository implements BookRepositoryInterface
         return $book;
     }
 
-    public function createBook(array $bookDetails)
+    public function createBook(array $bookDetails): Book
     {
         $book = $this->book->create($bookDetails);
 
         return $book;
     }
 
-    public function updateBook($bookId, array $newDetails)
+    public function updateBook(int $bookId, array $newDetails): Book
     {
         $book = $this->book->find($bookId);
 

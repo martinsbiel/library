@@ -16,7 +16,7 @@ class BookLoanTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_loan_can_be_created()
+    public function test_loan_can_be_created(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -43,7 +43,7 @@ class BookLoanTest extends TestCase
         ]);
     }
 
-    public function test_loans_can_be_listed()
+    public function test_loans_can_be_listed(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -71,7 +71,7 @@ class BookLoanTest extends TestCase
         ]);
     }
 
-    public function test_book_can_be_returned()
+    public function test_book_can_be_returned(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -91,7 +91,7 @@ class BookLoanTest extends TestCase
         ]);
     }
 
-    public function test_loan_can_be_set_delayed()
+    public function test_loan_can_be_set_delayed(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),

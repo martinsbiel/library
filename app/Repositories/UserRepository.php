@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -15,7 +16,7 @@ class UserRepository implements UserRepositoryInterface
         $this->user = $user;
     }
 
-    public function getAllUsers()
+    public function getAllUsers(): Collection
     {
         $users = $this->user->with('loans')->get();
 
@@ -26,7 +27,7 @@ class UserRepository implements UserRepositoryInterface
         return $users;
     }
 
-    public function getUserById($userId)
+    public function getUserById(int $userId): Collection
     {
         $user = $this->user->with('loans')->where('id', $userId)->get();
 
@@ -37,7 +38,7 @@ class UserRepository implements UserRepositoryInterface
         return $user;
     }
 
-    public function deleteUser($userId)
+    public function deleteUser(int $userId): User
     {
         $user = $this->user->find($userId);
 
@@ -50,14 +51,14 @@ class UserRepository implements UserRepositoryInterface
         return $user;
     }
 
-    public function createUser(array $userDetails)
+    public function createUser(array $userDetails): User
     {
         $user = $this->user->create($userDetails);
 
         return $user;
     }
 
-    public function updateUser($userId, array $newDetails)
+    public function updateUser(int $userId, array $newDetails): User
     {
         $user = $this->user->find($userId);
 

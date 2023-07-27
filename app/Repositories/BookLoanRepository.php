@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\BookLoanRepositoryInterface;
 use App\Models\Book;
 use App\Models\BookLoan;
+use Illuminate\Database\Eloquent\Collection;
 
 class BookLoanRepository implements BookLoanRepositoryInterface
 {
@@ -18,7 +19,7 @@ class BookLoanRepository implements BookLoanRepositoryInterface
         $this->book = $book;
     }
 
-    public function getAllLoans()
+    public function getAllLoans(): Collection
     {
         $loans = $this->loan->with(['book', 'user'])->get();
 
@@ -29,7 +30,7 @@ class BookLoanRepository implements BookLoanRepositoryInterface
         return $loans;
     }
 
-    public function createLoan(array $loanDetails)
+    public function createLoan(array $loanDetails): BookLoan
     {
         $book = $this->book->find($loanDetails['book_id']);
 
@@ -46,7 +47,7 @@ class BookLoanRepository implements BookLoanRepositoryInterface
         return $loan;
     }
 
-    public function setBookReturned($loanId)
+    public function setBookReturned(int $loanId): Book
     {
         $loan = $this->loan->find($loanId);
 
@@ -71,7 +72,7 @@ class BookLoanRepository implements BookLoanRepositoryInterface
         return $book;
     }
 
-    public function setLoanDelayed($loanId)
+    public function setLoanDelayed(int $loanId): BookLoan
     {
         $loan = $this->loan->find($loanId);
 

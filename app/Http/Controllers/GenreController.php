@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GenreRequest;
 use App\Interfaces\GenreRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 
 class GenreController extends Controller
 {
@@ -17,9 +18,9 @@ class GenreController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         try{
             return response()->json($this->genreRepository->getAllGenres(), 200);
@@ -32,9 +33,9 @@ class GenreController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  App\Http\Requests\GenreRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(GenreRequest $request)
+    public function store(GenreRequest $request): JsonResponse
     {
         try{
             $validated = $request->validated();
@@ -49,9 +50,9 @@ class GenreController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show(int $id): JsonResponse
     {
         try{
             return response()->json($this->genreRepository->getGenreById($id), 200);
@@ -65,9 +66,9 @@ class GenreController extends Controller
      *
      * @param  App\Http\Requests\GenreRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(GenreRequest $request, $id)
+    public function update(GenreRequest $request, int $id): JsonResponse
     {
         try{
             $validated = $request->validated();
@@ -82,9 +83,9 @@ class GenreController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         try{
             $this->genreRepository->deleteGenre($id);

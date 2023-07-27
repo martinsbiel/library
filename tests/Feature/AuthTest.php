@@ -18,7 +18,7 @@ class AuthTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_admin_can_login()
+    public function test_admin_can_login(): void
     {
         $admin = Admin::factory()->create();
 
@@ -32,7 +32,7 @@ class AuthTest extends TestCase
         $response->assertJsonStructure(['token']);
     }
 
-    public function test_admin_can_logout()
+    public function test_admin_can_logout(): void
     {
         Sanctum::actingAs(
             Admin::factory()->create(),
@@ -44,7 +44,7 @@ class AuthTest extends TestCase
         $response->assertJsonStructure(['success']);
     }
 
-    public function test_admin_can_send_password_reset_link()
+    public function test_admin_can_send_password_reset_link(): void
     {
         $admin = Admin::factory()->create();
 
@@ -55,7 +55,7 @@ class AuthTest extends TestCase
         Notification::assertSentTo($admin, ResetPassword::class);
     }
 
-    public function test_admin_can_reset_they_password()
+    public function test_admin_can_reset_they_password(): void
     {
         $admin = Admin::factory()->create();
         $token = Password::createToken($admin);
