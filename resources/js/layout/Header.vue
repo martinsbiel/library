@@ -29,7 +29,7 @@
                     {{ $store.state.user.name }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#">Alterar senha</a></li>
+                    <li><router-link class="dropdown-item" to="change-password">Alterar senha</router-link></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><router-link class="dropdown-item" to="logout">Sair</router-link></li>
                 </ul>

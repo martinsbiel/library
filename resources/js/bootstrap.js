@@ -39,7 +39,7 @@ axios.interceptors.response.use(
     },
     error => {
         if(error.response.status === 401){
-            this.store.dispatch('setAuthenticated', false);
+            this.$store.dispatch('setAuthenticated', false);
         }
         return Promise.reject(error);
     }

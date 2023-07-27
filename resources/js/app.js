@@ -14,6 +14,7 @@ import Home from './views/Home.vue';
 import Login from './views/Login.vue';
 import ForgotPassword from './views/ForgotPassword.vue';
 import ResetPassword from './views/ResetPassword.vue';
+import ChangePassword from './views/ChangePassword.vue';
 import Logout from './views/Logout.vue';
 import Users from './views/Users.vue';
 import Admins from './views/Admins.vue';
@@ -29,6 +30,9 @@ const routes = [
     { path: '/forgot-password', component: ForgotPassword },
     { path: '/reset-password/:token', component: ResetPassword },
     { path: '/logout', component: Logout, meta: {
+        auth: true
+    }},
+    { path: '/change-password', component: ChangePassword, meta: {
         auth: true
     }},
     { path: '/users', component: Users, meta: {

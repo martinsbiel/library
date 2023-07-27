@@ -86,7 +86,7 @@ class AdminRepository implements AdminRepositoryInterface
         }
 
         if(!Hash::check($details['password'], $admin->password)){
-            throw new \Exception('Senha incorreta.', 401);
+            throw new \Exception('Senha atual incorreta.', 403);
         }
 
         $admin->update([
