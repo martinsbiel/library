@@ -190,6 +190,9 @@
                         toastr.success('Administrador atualizado com sucesso.');
 
                         this.getAdmins();
+
+                        // in case admin updated themself
+                        this.$store.dispatch('me');
                     }).catch(errors => {
                         for(let value in errors.response.data.errors){
                             toastr.error(errors.response.data.errors[value]);

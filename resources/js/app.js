@@ -60,7 +60,6 @@ const router = VueRouter.createRouter({
 router.beforeEach(async(to, from) => {
     const loggedIn = store.state.isAuthenticated;
 
-    store.dispatch('me');
 
     if(to.matched.some(record => record.meta.auth) && !loggedIn && to.path !== '/login'){
         return {path: '/login'}
@@ -128,6 +127,35 @@ const store = createStore({
         }
     }
 });
+
+// intercepting requests
+axios.interceptors.request.use(
+    config => {
+        config.headers.Accept = 'application/json';
+
+        let token = `Bearer ${localStorage.getItem('token')}`;
+
+        config.headers.Authorization = token;
+
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
+
+// intercepting responses
+axios.interceptors.response.use(
+    response => {
+        return response;
+    },
+    error => {
+        if(error.response.status === 401){
+            store.dispatch('setAuthenticated', false);
+        }
+        return Promise.reject(error);
+    }
+);
 
 app.use(store);
 

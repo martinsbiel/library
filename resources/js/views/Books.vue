@@ -271,7 +271,7 @@
 
                         this.getBooks();
                     }).catch(errors => {
-                        toastr.error(errors.response.data.error);
+                        toastr.error(errors.response.data.errors);
                     });
             },
         },

@@ -209,7 +209,9 @@
 
                         this.getUsers();
                     }).catch(errors => {
-                        toastr.error(errors.response.data.error);
+                        for(let value in errors.response.data.errors){
+                            toastr.error(errors.response.data.errors[value]);
+                        }
                     });
             },
         },

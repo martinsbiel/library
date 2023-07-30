@@ -16,35 +16,6 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-// intercepting requests
-axios.interceptors.request.use(
-    config => {
-        config.headers.Accept = 'application/json';
-
-        let token = `Bearer ${localStorage.getItem('token')}`;
-
-        config.headers.Authorization = token;
-
-        return config;
-    },
-    error => {
-        return Promise.reject(error);
-    }
-);
-
-// intercepting responses
-axios.interceptors.response.use(
-    response => {
-        return response;
-    },
-    error => {
-        if(error.response.status === 401){
-            this.$store.dispatch('setAuthenticated', false);
-        }
-        return Promise.reject(error);
-    }
-);
-
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
