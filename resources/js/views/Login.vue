@@ -37,7 +37,7 @@
     export default {
         data(){
             return {
-                url: 'http://localhost:8000/api/v1/login',
+                url: '/api/v1/login',
                 email: '',
                 password: ''
             }

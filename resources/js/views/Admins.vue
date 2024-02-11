@@ -131,7 +131,7 @@
     export default {
         data(){
             return {
-                url: 'http://localhost:8000/api/v1/admins',
+                url: '/api/v1/admins',
                 name: '',
                 email: '',
                 password: '',

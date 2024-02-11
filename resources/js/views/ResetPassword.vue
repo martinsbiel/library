@@ -39,7 +39,7 @@
     export default {
         data(){
             return {
-                url: 'http://localhost:8000/api/v1/reset-password',
+                url: '/api/v1/reset-password',
                 token: '',
                 email: '',
                 password: '',

@@ -28,7 +28,7 @@
     export default {
         data(){
             return {
-                url: 'http://localhost:8000/api/v1/forgot-password',
+                url: '/api/v1/forgot-password',
                 email: ''
             }
         },

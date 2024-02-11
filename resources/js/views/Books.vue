@@ -170,7 +170,7 @@
     export default {
         data(){
             return {
-                url: 'http://localhost:8000/api/v1/books',
+                url: '/api/v1/books',
                 name: '',
                 author: '',
                 status: '',
@@ -196,7 +196,7 @@
                 this.genreName = genre;
             },
             getGenres(){
-                axios.get('http://localhost:8000/api/v1/genres')
+                axios.get('/api/v1/genres')
                     .then(response => {
                         this.genres = response.data;
                     });

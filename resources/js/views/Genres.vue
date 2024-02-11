@@ -13,9 +13,6 @@
                             item-value="name"
                             class="elevation-1"
                         >
-
-
-
                             <template v-slot:item="{ item }">
                                 <tr>
                                     <td>{{ item.columns.id }}</td>
@@ -113,7 +110,7 @@
     export default {
         data(){
             return {
-                url: 'http://localhost:8000/api/v1/genres',
+                url: '/api/v1/genres',
                 name: '',
                 itemsPerPage: 10,
                 headers: [

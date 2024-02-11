@@ -38,7 +38,7 @@
     export default {
         data(){
             return {
-                url: 'http://localhost:8000/api/v1/change-password',
+                url: '/api/v1/change-password',
                 password: '',
                 new_password: '',
                 new_password_confirmation: '',

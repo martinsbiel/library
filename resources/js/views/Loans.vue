@@ -114,7 +114,7 @@
     export default {
         data(){
             return {
-                url: 'http://localhost:8000/api/v1/loans',
+                url: '/api/v1/loans',
                 target_date: '',
                 user_id: '',
                 book_id: '',
@@ -144,13 +144,13 @@
                 this.bookName = book;
             },
             getBooks(){
-                axios.get('http://localhost:8000/api/v1/books')
+                axios.get('/api/v1/books')
                     .then(response => {
                         this.books = response.data;
                     });
             },
             getUsers(){
-                axios.get('http://localhost:8000/api/v1/users')
+                axios.get('/api/v1/users')
                     .then(response => {
                         this.users = response.data;
                     });
