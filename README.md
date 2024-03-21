@@ -1,8 +1,8 @@
 # Library
-Sistema de gerenciamento de biblioteca que consiste em uma API REST desenvolvida em [Laravel 10](https://laravel.com/docs/10.x) e consumida com [VueJS 3](https://vuejs.org/). O sistema contém gerenciamento de usuários, livros, gêneros e empréstimos. Todos os endpoints da API são testando com [PHPUnit](https://phpunit.de/), além de ter o design pattern repository implementado para manter o código mais limpo, organizado e legível. Essa organização acontece pois esse design pattern cria uma camada a mais de abstração entre o controller e model.
+Sistema de gerenciamento de biblioteca que consiste em uma API REST desenvolvida em [Laravel 11](https://laravel.com/docs/11.x) e consumida com [VueJS 3](https://vuejs.org/). O sistema contém gerenciamento de usuários, livros, gêneros e empréstimos. Todos os endpoints da API são testando com [PHPUnit](https://phpunit.de/), além de ter o design pattern repository implementado para manter o código mais limpo, organizado e legível. Essa organização acontece pois esse design pattern cria uma camada a mais de abstração entre o controller e model.
 
 ## Instalando o projeto
-Esse projeto utiliza a versão 10 do Laravel e a versão 3 do VueJS, então é necessário que você tenha o `PHP >= 8.1` e `Node.js >= 16.0`, assim como as extensões necessárias habilitadas no PHP, que são:
+Esse projeto utiliza a versão 11 do Laravel e a versão 3 do VueJS, então é necessário que você tenha o `PHP >= 8.2` e `Node.js >= 16.0`, assim como as extensões necessárias habilitadas no PHP, que são:
 
 - Ctype PHP Extension
 - cURL PHP Extension
