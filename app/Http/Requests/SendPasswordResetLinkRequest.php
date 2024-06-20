@@ -27,18 +27,4 @@ class SendPasswordResetLinkRequest extends FormRequest
             'email' => 'email|required|max:255'
         ];
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'email.email' => 'Insira um email válido',
-            'email.required' => 'O campo email é obrigatório',
-            'email.max' => 'O campo email deve conter no máximo 255 caracteres.',
-        ];
-    }
 }

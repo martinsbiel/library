@@ -9,6 +9,7 @@ import { createApp } from 'vue';
 import * as VueRouter from 'vue-router';
 import vuetify from './plugins/vuetify';
 import moment from 'moment';
+import { i18nVue, loadLanguageAsync } from 'laravel-vue-i18n';
 
 import Home from './views/Home.vue';
 import Login from './views/Login.vue';
@@ -75,6 +76,12 @@ router.beforeEach(async(to, from) => {
 const app = createApp({});
 app.use(router);
 app.use(vuetify);
+app.use(i18nVue, {
+    resolve: async lang => {
+        const langs = import.meta.glob('../../lang/*.json');
+        return await langs[`../../lang/${lang}.json`]();
+    }
+})
 
 import {createStore} from 'vuex';
 
@@ -82,6 +89,7 @@ const store = createStore({
     state: {
         item: {},
         isAuthenticated: false,
+        locale: '',
         user: []
     },
     actions: {
@@ -98,6 +106,13 @@ const store = createStore({
             user = payload;
             
             context.commit('SAVE_USER', user);
+        },
+        saveLocale(context, payload){
+            let locale = context.state.locale;
+
+            locale = payload;
+
+            context.commit('SAVE_LOCALE', locale);
         },
         setAuthenticated(context, payload){
             let status = context.state.isAuthenticated;
@@ -121,6 +136,9 @@ const store = createStore({
         },
         SAVE_USER(state, payload){
             state.user = payload;
+        },
+        SAVE_LOCALE(state, payload){
+            state.locale = payload;
         },
         SAVE_STATUS(state, payload){
             state.isAuthenticated = payload;

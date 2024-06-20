@@ -14,9 +14,11 @@ return [
     */
 
     'reset' => 'Your password has been reset!',
+    'title' => 'Reset password',
     'sent' => 'We have emailed your password reset link!',
     'throttled' => 'Please wait before retrying.',
     'token' => 'This password reset token is invalid.',
+    'not_found' => 'No tokens for this email were found.',
     'user' => "We can't find a user with that email address.",
-
+    'request_new' => 'Request a new password',
 ];

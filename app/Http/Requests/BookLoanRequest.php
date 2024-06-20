@@ -29,21 +29,4 @@ class BookLoanRequest extends FormRequest
             'book_id' => 'required|numeric'
         ];
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'target_date.required' => 'O campo devolução é obrigatório.',
-            'target_date.date' => 'O campo devolução deve conter uma data válida.',
-            'user_id.required' => 'O campo usuário é obrigatório.',
-            'user_id.numeric' => 'O campo usuário deve conter um valor numérico.',
-            'book_id.required' => 'O campo livro é obrigatório.',
-            'book_id.numeric' => 'O campo livro deve conter um valor numérico.',
-        ];
-    }
 }

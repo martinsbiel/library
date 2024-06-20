@@ -90,7 +90,7 @@ class GenreController extends Controller
         try{
             $this->genreRepository->deleteGenre($id);
 
-            return response()->json(['success' => 'Gênero excluído com sucesso.'], 200);
+            return response()->json(['success' => __('genre.deleted')], 200);
         }catch(\Exception $e){
             return response()->json(['errors' => [$e->getMessage()]], $e->getCode());
         }

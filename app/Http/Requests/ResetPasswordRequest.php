@@ -29,19 +29,4 @@ class ResetPasswordRequest extends FormRequest
             'password' => 'required|confirmed',
         ];
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'email.email' => 'Insira um email válido',
-            'email.required' => 'O campo email é obrigatório',
-            'password.required' => 'O campo senha é obrigatório',
-            'password.confirmed' => 'As senhas não coincidem.'
-        ];
-    }
 }

@@ -3,28 +3,28 @@
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="card">
-                    <h4 class="card-header d-flex"><span class="align-self-center">Redefinir senha</span></h4>
+                    <h4 class="card-header d-flex"><span class="align-self-center">{{ $t('passwords.title') }}</span></h4>
 
                     <div class="card-body">
                         <form action="" method="post" @submit.prevent="resetPassword()">
                             <div class="form-group mb-4">
                                 <input type="hidden" name="token" id="token" :value="$route.params.token">
-                                <label class="form-label" for="email">Email:</label>
-                                <input class="form-control" type="email" name="email" id="email" placeholder="Email" v-model="email" autofocus>
+                                <label class="form-label" for="email">{{ $t('ui.email') }}:</label>
+                                <input class="form-control" type="email" name="email" id="email" :placeholder="$t('ui.email')" v-model="email" autofocus>
                             </div>
 
                             <div class="form-group mb-4">
-                                <label class="form-label" for="password">Senha:</label>
-                                <input class="form-control" type="password" name="password" id="password" placeholder="Senha" v-model="password">
+                                <label class="form-label" for="password">{{ $t('ui.pass') }}:</label>
+                                <input class="form-control" type="password" name="password" id="password" :placeholder="$t('ui.pass')" v-model="password">
                             </div>
 
                             <div class="form-group mb-4">
-                                <label class="form-label" for="password_confirmation">Confirmar senha:</label>
-                                <input class="form-control" type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirmar senha" v-model="password_confirmation">
+                                <label class="form-label" for="password_confirmation">{{ $t('ui.confirm_pass') }}:</label>
+                                <input class="form-control" type="password" name="password_confirmation" id="password_confirmation" :placeholder="$t('ui.confirm_pass')" v-model="password_confirmation">
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-lg btn-dark">Redefinir</button>
+                                <button class="btn btn-lg btn-dark">{{ $t('ui.reset') }}</button>
                             </div>
                         </form>
                     </div>

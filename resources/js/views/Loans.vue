@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <h4 class="card-header d-flex"><span class="align-self-center">Gerenciar Empréstimos</span> <button type="button" data-bs-toggle="modal" data-bs-target="#modalLoanAdd" class="btn btn-dark btn-lg text-white ms-auto">Adicionar empréstimo</button></h4>
+                    <h4 class="card-header d-flex"><span class="align-self-center">{{ $t('loan.manage') }}</span> <button type="button" data-bs-toggle="modal" data-bs-target="#modalLoanAdd" class="btn btn-dark btn-lg text-white ms-auto">{{ $t('loan.add') }}</button></h4>
 
                     <div class="card-body">
                         <v-data-table
@@ -19,8 +19,8 @@
                                     <td>{{ item.columns.target_date }}</td>
                                     <td>{{ item.raw.user === null ? '-' : item.raw.user.name }}</td>
                                     <td>{{ item.raw.book === null ? '-' : item.raw.book.name }}</td>
-                                    <td>{{ item.columns.delayed ? 'Atrasado' : 'Em dia' }}</td>
-                                    <td>{{ item.columns.returned ? 'Devolvido' : 'Emprestado' }}</td>
+                                    <td>{{ item.columns.delayed ? $t('ui.overdue') : $t('ui.on_time') }}</td>
+                                    <td>{{ item.columns.returned ? $t('ui.returned') : $t('ui.loaned') }}</td>
                                     <td>{{ item.columns.created_at }}</td>
                                     <td>
                                         <v-icon
@@ -50,67 +50,69 @@
         </div>
     </div>
 
-    <modal-component id="modalLoanSetStatus" title="Alterar empréstimo">
+    <modal-component id="modalLoanSetStatus" :title="$t('loan.modify')">
         <template v-slot:content>
-            <p>Revise os dados antes de marcar como devolvido ou atrasado:</p>
+            <p>{{ $t('loan.review') }}:</p>
             <div class="form-group mb-4">
-                <label class="form-label" for="dateRemove">Data para devolução:</label>
-                <input class="form-control" type="text" name="dateRemove" id="dateRemove" placeholder="Prazo para devolução" v-model="$store.state.item.target_date" disabled>
+                <label class="form-label" for="dateRemove">{{ $t('ui.return_date') }}:</label>
+                <input class="form-control" type="text" name="dateRemove" id="dateRemove" v-model="$store.state.item.target_date" disabled>
             </div>
 
             <div class="form-group mb-4">
-                <label class="form-label" for="userRemove">Usuário:</label>
-                <input class="form-control" type="text" name="userRemove" id="userRemove" placeholder="Usuário" v-model="userName" disabled>
+                <label class="form-label" for="userRemove">{{ $t('ui.user') }}:</label>
+                <input class="form-control" type="text" name="userRemove" id="userRemove" v-model="userName" disabled>
             </div>
 
             <div class="form-group mb-4">
-                <label class="form-label" for="bookRemove">Livro:</label>
-                <input class="form-control" type="text" name="bookRemove" id="bookRemove" placeholder="Livro emprestado" v-model="bookName" disabled>
+                <label class="form-label" for="bookRemove">{{ $t('ui.book') }}:</label>
+                <input class="form-control" type="text" name="bookRemove" id="bookRemove" v-model="bookName" disabled>
             </div>
 
             <div class="form-group mb-4">
-                <label class="form-label" for="dateRemove">Data do empréstimo:</label>
-                <input class="form-control" type="text" name="dateRemove" id="dateRemove" placeholder="Data do empréstimo" :value="$store.state.item.created_at" disabled>
+                <label class="form-label" for="dateRemove">{{ $t('ui.registration_date') }}:</label>
+                <input class="form-control" type="text" name="dateRemove" id="dateRemove" :value="$store.state.item.created_at" disabled>
             </div>
         </template>
         <template v-slot:footer>
-            <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-danger text-white" @click="setDelayed()">Atrasado</button>
-            <button type="button" class="btn btn-success text-white" @click="setReturned()">Devolver</button>
+            <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">{{ $t('ui.close') }}</button>
+            <button type="button" class="btn btn-danger text-white" @click="setDelayed()">{{ $t('ui.overdue') }}</button>
+            <button type="button" class="btn btn-success text-white" @click="setReturned()">{{ $t('ui.return') }}</button>
         </template>
     </modal-component>
 
-    <modal-component id="modalLoanAdd" title="Adicionar empréstimo">
+    <modal-component id="modalLoanAdd" :title="$t('loan.add')">
         <template v-slot:content>
             <div class="form-group mb-4">
-                <label class="form-label" for="dateAdd">Data para devolução:</label>
-                <input class="form-control" type="date" name="dateAdd" id="dateAdd" placeholder="Data da devolução" v-model="target_date">
+                <label class="form-label" for="dateAdd">{{ $t('ui.return_date') }}:</label>
+                <input class="form-control" type="date" name="dateAdd" id="dateAdd" :placeholder="$t('ui.return_date')" v-model="target_date">
             </div>
 
             <div class="form-group mb-4">
-                <label class="form-label" for="bookAdd">Livro:</label>
+                <label class="form-label" for="bookAdd">{{ $t('ui.book') }}:</label>
                 <select class="form-select" name="bookAdd" id="bookAdd" v-model="book_id">
-                        <option value="" hidden selected>Selecione o livro</option>
+                        <option value="" hidden selected>{{ $t('ui.select_book') }}</option>
                         <option v-for="item in books" :key="item.id" :value="item.id">{{item.name}}</option>
                 </select>
             </div>
 
             <div class="form-group mb-4">
-                <label class="form-label" for="userAdd">Usuário:</label>
+                <label class="form-label" for="userAdd">{{ $t('ui.user') }}:</label>
                 <select class="form-select" name="userAdd" id="userAdd" v-model="user_id">
-                        <option value="" hidden selected>Selecione o usuário</option>
+                        <option value="" hidden selected>{{ $t('ui.select_user') }}</option>
                         <option v-for="item in users" :key="item.id" :value="item.id">{{item.name}}</option>
                 </select>
             </div>
         </template>
         <template v-slot:footer>
-            <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-dark text-white" @click="create()">Cadastrar</button>
+            <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">{{ $t('ui.close') }}</button>
+            <button type="button" class="btn btn-dark text-white" @click="create()">{{ $t('ui.register') }}</button>
         </template>
     </modal-component>
 </template>
 
 <script>
+import { trans } from 'laravel-vue-i18n';
+
     export default {
         data(){
             return {
@@ -123,13 +125,13 @@
                 itemsPerPage: 10,
                 headers: [
                     {title: '#', sortable: true, key: 'id'},
-                    {title: 'Data para devolução', sortable: true, key: 'target_date'},
-                    {title: 'Usuário', sortable: true, key: 'user.name'},
-                    {title: 'Livro', sortable: true, key: 'book.name'},
-                    {title: 'Devolução', sortable: true, key: 'delayed'},
-                    {title: 'Status', sortable: true, key: 'returned'},
-                    {title: 'Criado em', sortable: true, key: 'created_at'},
-                    {title: 'Ações', sortable: false, key: 'actions'},
+                    {title: trans('ui.return_date'), sortable: true, key: 'target_date'},
+                    {title: trans('ui.user'), sortable: true, key: 'user.name'},
+                    {title: trans('ui.book'), sortable: true, key: 'book.name'},
+                    {title: trans('ui.return_status'), sortable: true, key: 'delayed'},
+                    {title: trans('ui.status'), sortable: true, key: 'returned'},
+                    {title: trans('ui.created_at'), sortable: true, key: 'created_at'},
+                    {title: trans('ui.actions'), sortable: false, key: 'actions'},
                 ],
                 loans: [],
                 books: [],
@@ -174,7 +176,7 @@
 
                 axios.post(this.url, formData)
                     .then(response => {
-                        toastr.success('Empréstimo cadastrado com sucesso.');
+                        toastr.success(trans('loan.added'));
                         this.target_date = '';
                         this.user_id = '';
                         this.book_id = '';
@@ -192,7 +194,7 @@
 
                 axios.post(this.url + '/set-returned/' + this.$store.state.item.id, formData)
                     .then(response => {
-                        toastr.success('Livro devolvido com sucesso.');
+                        toastr.success(trans('book.returned'));
 
                         this.getLoans();
                     }).catch(errors => {
@@ -209,7 +211,7 @@
 
                 axios.post(this.url + '/set-delayed/' + this.$store.state.item.id, formData)
                     .then(response => {
-                        toastr.success('Empréstimo marcado como atrasado.');
+                        toastr.success(trans('loan.overdue'));
 
                         this.getLoans();
                     }).catch(errors => {

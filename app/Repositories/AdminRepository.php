@@ -22,7 +22,7 @@ class AdminRepository implements AdminRepositoryInterface
         $admins = $this->admin->get();
 
         if(count($admins) === 0){
-            throw new \Exception('Nenhum administrador encontrado.', 404);
+            throw new \Exception(__('admin.not_found'), 404);
         }
 
         return $admins;
@@ -33,7 +33,7 @@ class AdminRepository implements AdminRepositoryInterface
         $admin = $this->admin->find($adminId);
 
         if(!$admin){
-            throw new \Exception('Administrador não encontrado.', 404);
+            throw new \Exception(__('admin.not_found'), 404);
         }
 
         return $admin;
@@ -44,7 +44,7 @@ class AdminRepository implements AdminRepositoryInterface
         $admin = $this->admin->find($adminId);
 
         if(!$admin){
-            throw new \Exception('Administrador não encontrado.', 404);
+            throw new \Exception(__('admin.not_found'), 404);
         }
 
         $admin->delete();
@@ -70,7 +70,7 @@ class AdminRepository implements AdminRepositoryInterface
         $admin = $this->admin->find($adminId);
 
         if(!$admin){
-            throw new \Exception('Administrador não encontrado.', 404);
+            throw new \Exception(__('admin.not_found'), 404);
         }
 
         $admin->update($newDetails);
@@ -83,11 +83,11 @@ class AdminRepository implements AdminRepositoryInterface
         $admin = $this->admin->find($adminId);
 
         if(!$admin){
-            throw new \Exception('Administrador não encontrado.', 404);
+            throw new \Exception(__('admin.not_found'), 404);
         }
 
         if(!Hash::check($details['password'], $admin->password)){
-            throw new \Exception('Senha atual incorreta.', 403);
+            throw new \Exception(__('admin.change_pass_failed'), 403);
         }
 
         $admin->update([

@@ -30,21 +30,4 @@ class StoreBookRequest extends FormRequest
             'genre_id' => 'required|numeric'
         ];
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'name.required' => 'O campo nome é obrigatório.',
-            'name.max' => 'O campo nome pode conter no máximo 255 caracteres.',
-            'author.required' => 'O campo autor é obrigatório.',
-            'author.max' => 'O campo autor pode conter no máximo 255 caracteres.',
-            'status.boolean' => 'O campo status precisa conter um valor booleano, 0 para disponível e 1 para emprestado.',
-            'genre_id.required' => 'O campo gênero é obrigatório'
-        ];
-    }
 }

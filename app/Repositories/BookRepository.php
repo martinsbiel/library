@@ -21,7 +21,7 @@ class BookRepository implements BookRepositoryInterface
         $books = $this->book->with(['genre', 'loan'])->get();
 
         if(count($books) === 0){
-            throw new \Exception('Nenhum livro encontrado.', 404);
+            throw new \Exception(__('book.not_found'), 404);
         }
 
         return $books;
@@ -32,7 +32,7 @@ class BookRepository implements BookRepositoryInterface
         $book = $this->book->with(['genre', 'loan'])->where('id', $bookId)->get();
 
         if(count($book) === 0){
-            throw new \Exception('Livro não encontrado.', 404);
+            throw new \Exception(__('book.not_found'), 404);
         }
 
         return $book;
@@ -43,7 +43,7 @@ class BookRepository implements BookRepositoryInterface
         $book = $this->book->find($bookId);
 
         if(!$book){
-            throw new \Exception('Livro não encontrado.', 404);
+            throw new \Exception(__('book.not_found'), 404);
         }
 
         $book->delete();
@@ -63,7 +63,7 @@ class BookRepository implements BookRepositoryInterface
         $book = $this->book->find($bookId);
 
         if(!$book){
-            throw new \Exception('Livro não encontrado.', 404);
+            throw new \Exception(__('book.not_found'), 404);
         }
 
         $book->update($newDetails);

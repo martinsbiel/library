@@ -3,17 +3,17 @@
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="card">
-                    <h4 class="card-header d-flex"><span class="align-self-center">Solicitar troca de senha</span></h4>
+                    <h4 class="card-header d-flex"><span class="align-self-center">{{ $t('passwords.request_new') }}</span></h4>
 
                     <div class="card-body">
                         <form action="" method="post" @submit.prevent="sendResetLink()">
                             <div class="form-group mb-4">
-                                <label class="form-label" for="email">Email:</label>
-                                <input class="form-control" type="email" name="email" id="email" placeholder="Email" v-model="email" autofocus>
+                                <label class="form-label" for="email">{{ $t('ui.email') }}:</label>
+                                <input class="form-control" type="email" name="email" id="email" :placeholder="$t('ui.email')" v-model="email" autofocus>
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-lg btn-dark">Solicitar</button>
+                                <button class="btn btn-lg btn-dark">{{ $t('ui.send') }}</button>
                             </div>
                         </form>
                     </div>

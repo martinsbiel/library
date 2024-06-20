@@ -28,18 +28,4 @@ class ChangePasswordRequest extends FormRequest
             'new_password' => 'required|confirmed'
         ];
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'password.required' => 'O campo senha é obrigatório.',
-            'new_password.required' => 'Insira uma nova senha.',
-            'new_password.confirmed' => 'As senhas não coincidem.'
-        ];
-    }
 }

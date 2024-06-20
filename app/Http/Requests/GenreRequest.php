@@ -27,17 +27,4 @@ class GenreRequest extends FormRequest
             'name' => 'required|max:255'
         ];
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'name.required' => 'O campo nome é obrigatório.',
-            'name.max' => 'O campo nome pode conter no máximo 255 caracteres.'
-        ];
-    }
 }

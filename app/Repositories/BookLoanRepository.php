@@ -24,7 +24,7 @@ class BookLoanRepository implements BookLoanRepositoryInterface
         $loans = $this->loan->with(['book', 'user'])->get();
 
         if(count($loans) === 0){
-            throw new \Exception('Nenhum empréstimo encontrado.', 404);
+            throw new \Exception(__('loan.not_found'), 404);
         }
 
         return $loans;
@@ -35,7 +35,7 @@ class BookLoanRepository implements BookLoanRepositoryInterface
         $book = $this->book->find($loanDetails['book_id']);
 
         if(!$book->status){
-            throw new \Exception('Este livro já está emprestado.', 422);
+            throw new \Exception(__('book.already_on_loan'), 422);
         }
 
         $loan = $this->loan->create($loanDetails);
@@ -52,7 +52,7 @@ class BookLoanRepository implements BookLoanRepositoryInterface
         $loan = $this->loan->find($loanId);
 
         if(!$loan){
-            throw new \Exception('Nenhum empréstimo encontrado.', 404);
+            throw new \Exception(__('loan.not_found'), 404);
         }
 
         $loan->update(['returned' => true]);
@@ -62,7 +62,7 @@ class BookLoanRepository implements BookLoanRepositoryInterface
         $book = $this->book->find($bookId);
 
         if(!$book){
-            throw new \Exception('Nenhum livro encontrado.', 404);
+            throw new \Exception(__('book.not_found'), 404);
         }
         
         $book->update([
@@ -77,7 +77,7 @@ class BookLoanRepository implements BookLoanRepositoryInterface
         $loan = $this->loan->find($loanId);
 
         if(!$loan){
-            throw new \Exception('Nenhum empréstimo encontrado.', 404);
+            throw new \Exception(__('loan.not_found'), 404);
         }
 
         $loan->update([

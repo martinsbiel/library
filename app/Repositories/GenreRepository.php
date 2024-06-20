@@ -21,7 +21,7 @@ class GenreRepository implements GenreRepositoryInterface
         $genres = $this->genre->with('books')->get();
 
         if(count($genres) === 0){
-            throw new \Exception('Nenhum gênero encontrado.', 404);
+            throw new \Exception(__('genre.not_found'), 404);
         }
 
         return $genres;
@@ -32,7 +32,7 @@ class GenreRepository implements GenreRepositoryInterface
         $genre = $this->genre->with('books')->where('id', $genreId)->get();
 
         if(count($genre) === 0){
-            throw new \Exception('Gênero não encontrado.', 404);
+            throw new \Exception(__('genre.not_found'), 404);
         }
 
         return $genre;
@@ -43,7 +43,7 @@ class GenreRepository implements GenreRepositoryInterface
         $genre = $this->genre->find($genreId);
 
         if(!$genre){
-            throw new \Exception('Gênero não encontrado.', 404);
+            throw new \Exception(__('genre.not_found'), 404);
         }
 
         $genre->delete();
@@ -63,7 +63,7 @@ class GenreRepository implements GenreRepositoryInterface
         $genre = $this->genre->find($genreId);
 
         if(!$genre){
-            throw new \Exception('Gênero não encontrado.', 404);
+            throw new \Exception(__('genre.not_found'), 404);
         }
 
         $genre->update($newDetails);

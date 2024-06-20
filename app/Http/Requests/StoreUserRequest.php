@@ -28,21 +28,4 @@ class StoreUserRequest extends FormRequest
             'email' => 'required|email|unique:users|max:255'
         ];
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'name.required' => 'O campo nome é obrigatório.',
-            'name.max' => 'O campo nome deve conter no máximo 255 caracteres.',
-            'email.required' => 'O campo email é obrigatório.',
-            'email.email' => 'Insira um email válido',
-            'email.unique' => 'Já existe alguém cadastrado com este email.',
-            'email.max' => 'O campo email deve conter no máximo 255 caracteres.',
-        ];
-    }
 }

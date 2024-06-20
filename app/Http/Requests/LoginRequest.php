@@ -26,19 +26,4 @@ class LoginRequest extends FormRequest
             'password' => 'required'
         ];
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'email.required' => 'O campo email é obrigatório.',
-            'email.email' => 'Insira um email válido',
-            'email.max' => 'O campo email deve conter no máximo 255 caracteres.',
-            'password.required' => 'O campo senha é obrigatório.'
-        ];
-    }
 }

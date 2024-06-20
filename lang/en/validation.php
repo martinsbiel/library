@@ -174,6 +174,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'new_password' => 'password',
+        'book_id' => 'book',
+        'user_id' => 'user',
+        'genre_id' => 'genre',
+    ],
 
 ];

@@ -51,7 +51,7 @@ class BookLoanController extends Controller
         try{
             $this->loanRepository->setBookReturned($id);
 
-            return response()->json(['success' => 'Livro devolvido com sucesso.'], 200);
+            return response()->json(['success' => __('book.returned')], 200);
         }catch(\Exception $e){
             return response()->json(['errors' => [$e->getMessage()]], $e->getCode());
         }
@@ -62,7 +62,7 @@ class BookLoanController extends Controller
         try{
             $this->loanRepository->setLoanDelayed($id);
 
-            return response()->json(['success' => 'Empréstimo marcado como atrasado.'], 200);
+            return response()->json(['success' => __('loan.overdue')], 200);
         }catch(\Exception $e){
             return response()->json(['errors' => [$e->getMessage()]], $e->getCode());
         }

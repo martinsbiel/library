@@ -17,7 +17,7 @@ class AuthRepository implements AuthRepositoryInterface
         $admin = Admin::where('email', $adminDetails['email'])->first();
 
         if(!$admin || !Hash::check($adminDetails['password'], $admin->password)){
-            throw new \Exception('Credenciais incorretas.', 401);
+            throw new \Exception(__('auth.failed'), 401);
         }
      
         return $admin->createToken($admin->email)->plainTextToken;
@@ -33,7 +33,7 @@ class AuthRepository implements AuthRepositoryInterface
         $admin = Admin::where('email', $email)->first();
 
         if(!$admin){
-            throw new \Exception('Nenhum administrador cadastrado com este email', 404);
+            throw new \Exception(__('admin.not_found_email'), 404);
         }
 
         $status = Password::sendResetLink($email);
@@ -46,11 +46,11 @@ class AuthRepository implements AuthRepositoryInterface
         $admin = Admin::where('email', $resetDetails['email'])->first();
 
         if(!$admin){
-            throw new \Exception('Nenhum administrador cadastrado com este email', 404);
+            throw new \Exception(__('admin.not_found'), 404);
         }
 
         if(!Password::tokenExists($admin, $resetDetails['token'])){
-            throw new \Exception('Nenhum token para este email foi encontrado.', 404);
+            throw new \Exception(__('passwords.not_found'), 404);
         }
 
         $status = Password::reset($resetDetails, function (Admin $admin, string $password) {

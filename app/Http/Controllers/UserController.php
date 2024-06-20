@@ -91,7 +91,7 @@ class UserController extends Controller
         try{
             $this->userRepository->deleteUser($id);
 
-            return response()->json(['success' => 'Usuário excluído com sucesso.'], 200);
+            return response()->json(['success' => __('user.deleted')], 200);
         }catch(\Exception $e){
             return response()->json(['errors' => [$e->getMessage()]], $e->getCode());
         }

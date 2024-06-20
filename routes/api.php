@@ -24,6 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('lang/{locale}', function($locale){
+    session()->put('locale', $locale);
+});
+
 Route::prefix('v1')->group(function(){
     Route::middleware('auth:sanctum')->group(function(){
         Route::apiResource('users', UserController::class);

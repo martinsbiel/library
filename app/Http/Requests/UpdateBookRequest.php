@@ -30,19 +30,4 @@ class UpdateBookRequest extends FormRequest
             'genre_id' => 'numeric'
         ];
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'name.max' => 'O campo nome pode conter no máximo 255 caracteres.',
-            'author.max' => 'O campo autor pode conter no máximo 255 caracteres.',
-            'status.boolean' => 'O campo status precisa conter um valor booleano, 0 para disponível e 1 para emprestado.',
-            'genre_id.numeric' => 'O campo gênero precisa conter um valor numérico.'
-        ];
-    }
 }

@@ -91,7 +91,7 @@ class BookController extends Controller
         try{
             $this->bookRepository->deleteBook($id);
 
-            return response()->json(['success' => 'Livro excluído com sucesso.'], 200);
+            return response()->json(['success' => __('book.deleted')], 200);
         }catch(\Exception $e){
             return response()->json(['errors' => [$e->getMessage()]], $e->getCode());
         }

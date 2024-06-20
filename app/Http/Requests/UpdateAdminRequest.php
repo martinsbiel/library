@@ -26,18 +26,4 @@ class UpdateAdminRequest extends FormRequest
             'email' => 'email|max:255'
         ];
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'name.max' => 'O campo nome deve conter no máximo 255 caracteres.',
-            'email.email' => 'Insira um email válido',
-            'email.max' => 'O campo email deve conter no máximo 255 caracteres.',
-        ];
-    }
 }

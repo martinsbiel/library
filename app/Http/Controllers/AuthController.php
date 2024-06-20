@@ -34,7 +34,7 @@ class AuthController extends Controller
         try {
             $this->authRepository->logout($request);
 
-            return response()->json(['success' => 'Logout realizado com sucesso'], 200);
+            return response()->json(['success' => __('auth.logout')], 200);
         } catch(\Exception $e){
             return response()->json(['error' => $e->getMessage()], $e->getCode());
         }
@@ -47,7 +47,7 @@ class AuthController extends Controller
 
             $this->authRepository->sendPasswordResetLink($validated);
 
-            return response()->json(['success' => 'Link para recuperar senha enviado.'], 200);
+            return response()->json(['success' => __('passwords.sent')], 200);
         }catch(\Exception $e){
             return response()->json(['errors' => [$e->getMessage()]], $e->getCode());
         }
@@ -60,7 +60,7 @@ class AuthController extends Controller
 
             $this->authRepository->resetPassword($validated);
 
-            return response()->json(['success' => 'Senha alterada com sucesso.'], 200);
+            return response()->json(['success' => __('passwords.reset')], 200);
         }catch(\Exception $e){
             return response()->json(['errors' => [$e->getMessage()]], $e->getCode());
         }
