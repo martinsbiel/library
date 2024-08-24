@@ -3,7 +3,11 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <h4 class="card-header d-flex"><span class="align-self-center">{{ $t('book.manage') }}</span> <button type="button" data-bs-toggle="modal" data-bs-target="#modalBookAdd" class="btn btn-dark btn-lg text-white ms-auto">{{ $t('book.add') }}</button></h4>
+                    <h4 class="card-header d-flex"><span class="align-self-center">{{ $t('book.manage') }}</span> 
+                        <div class="col-3 align-self-center ml-5">
+                            <input class="form-control" type="text" placeholder="Search" v-model="search">
+                        </div>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalBookAdd" class="btn btn-dark btn-lg text-white ms-auto">{{ $t('book.add') }}</button></h4>
 
                     <div class="card-body">
                         <v-data-table
@@ -12,6 +16,7 @@
                             :items="books"
                             item-value="name"
                             class="elevation-1"
+                            :search="search"
                         >
                             <template v-slot:item="{ item }">
                                 <tr>
@@ -179,6 +184,7 @@ import { trans } from 'laravel-vue-i18n';
                 genre_id: '',
                 genreName: '',
                 itemsPerPage: 10,
+                search: '',
                 headers: [
                     {title: '#', sortable: true, key: 'id'},
                     {title: trans('ui.name'), sortable: true, key: 'name'},
