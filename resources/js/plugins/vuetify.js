@@ -5,8 +5,7 @@ import * as components from 'vuetify/components';
 import { VIcon } from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import { VBtn } from 'vuetify/components';
-import { VTooltip } from 'vuetify/components';
-import { VDataTable } from 'vuetify/labs/VDataTable';
+import { VTooltip, VDataTable } from 'vuetify/components';
 import { aliases, mdi } from 'vuetify/iconsets/mdi';
 
 const vuetify = createVuetify({

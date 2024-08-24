@@ -15,20 +15,20 @@
                         >
                             <template v-slot:item="{ item }">
                                 <tr>
-                                    <td>{{ item.columns.id }}</td>
-                                    <td>{{ item.columns.name }}</td>
-                                    <td>{{ item.columns.author }}</td>
-                                    <td>{{ item.columns.status == 0 ? $t('ui.loaned') : $t('ui.available') }}</td>
-                                    <td>{{ item.raw.genre === null ? '-' : item.raw.genre.name }}</td>
-                                    <td>{{ item.columns.created_at }}</td>
-                                    <td>{{ item.columns.updated_at }}</td>
+                                    <td>{{ item.id }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.author }}</td>
+                                    <td>{{ item.status == 0 ? $t('ui.loaned') : $t('ui.available') }}</td>
+                                    <td>{{ item.genre === null ? '-' : item.genre.name }}</td>
+                                    <td>{{ item.created_at }}</td>
+                                    <td>{{ item.updated_at }}</td>
                                     <td>
                                         <v-icon
                                             data-bs-toggle="modal"
                                             data-bs-target="#modalBookUpdate"
                                             icon="mdi-pencil"
                                             size="large"
-                                            @click="$store.dispatch('saveItem', item.raw);"
+                                            @click="$store.dispatch('saveItem', item);"
                                         />
                                         &nbsp;
                                         <v-icon
@@ -36,7 +36,7 @@
                                             data-bs-target="#modalBookDelete"
                                             icon="mdi-delete"
                                             size="large"
-                                            @click="$store.dispatch('saveItem', item.raw);setGenre(item.raw.genre.name)"
+                                            @click="$store.dispatch('saveItem', item);setGenre(item.genre.name)"
                                         />
                                     </td>
                                 </tr>

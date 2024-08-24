@@ -15,30 +15,30 @@
                         >
                             <template v-slot:item="{ item }">
                                 <tr>
-                                    <td>{{ item.columns.id }}</td>
-                                    <td>{{ item.columns.target_date }}</td>
-                                    <td>{{ item.raw.user === null ? '-' : item.raw.user.name }}</td>
-                                    <td>{{ item.raw.book === null ? '-' : item.raw.book.name }}</td>
-                                    <td>{{ item.columns.delayed ? $t('ui.overdue') : $t('ui.on_time') }}</td>
-                                    <td>{{ item.columns.returned ? $t('ui.returned') : $t('ui.loaned') }}</td>
-                                    <td>{{ item.columns.created_at }}</td>
+                                    <td>{{ item.id }}</td>
+                                    <td>{{ item.target_date }}</td>
+                                    <td>{{ item.user === null ? '-' : item.user.name }}</td>
+                                    <td>{{ item.book === null ? '-' : item.book.name }}</td>
+                                    <td>{{ item.delayed ? $t('ui.overdue') : $t('ui.on_time') }}</td>
+                                    <td>{{ item.returned ? $t('ui.returned') : $t('ui.loaned') }}</td>
+                                    <td>{{ item.created_at }}</td>
                                     <td>
                                         <v-icon
-                                            v-show="!item.columns.returned"
+                                            v-show="!item.returned"
                                             data-bs-toggle="modal"
                                             data-bs-target="#modalLoanSetStatus"
                                             icon="mdi-check"
                                             size="large"
-                                            @click="$store.dispatch('saveItem', item.raw);setBook(item.raw.book === null ? '-' : item.raw.book.name);setUser(item.raw.user === null ? '-' : item.raw.user.name);"
+                                            @click="$store.dispatch('saveItem', item);setBook(item.book === null ? '-' : item.book.name);setUser(item.user === null ? '-' : item.user.name);"
                                         />
                                         &nbsp;
                                         <v-icon
-                                            v-show="!item.columns.returned"
+                                            v-show="!item.returned"
                                             data-bs-toggle="modal"
                                             data-bs-target="#modalLoanSetStatus"
                                             icon="mdi-calendar"
                                             size="large"
-                                            @click="$store.dispatch('saveItem', item.raw);setBook(item.raw.book === null ? '-' : item.raw.book.name);setUser(item.raw.user === null ? '-' : item.raw.user.name);"
+                                            @click="$store.dispatch('saveItem', item);setBook(item.book === null ? '-' : item.book.name);setUser(item.user === null ? '-' : item.user.name);"
                                         />
                                     </td>
                                 </tr>

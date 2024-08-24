@@ -7,7 +7,7 @@
 
                     <div class="card-body">
                         <v-data-table
-                            v-model:items-per-page="itemsPerPage"
+                            :items-per-page="itemsPerPage"
                             :headers="headers"
                             :items="admins"
                             item-value="name"
@@ -15,18 +15,18 @@
                         >
                             <template v-slot:item="{ item }">
                                 <tr>
-                                    <td>{{ item.columns.id }}</td>
-                                    <td>{{ item.columns.name }}</td>
-                                    <td>{{ item.columns.email }}</td>
-                                    <td>{{ item.columns.created_at }}</td>
-                                    <td>{{ item.columns.updated_at }}</td>
+                                    <td>{{ item.id }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.email }}</td>
+                                    <td>{{ item.created_at }}</td>
+                                    <td>{{ item.updated_at }}</td>
                                     <td>
                                         <v-icon
                                             data-bs-toggle="modal"
                                             data-bs-target="#modalAdminUpdate"
                                             icon="mdi-pencil"
                                             size="large"
-                                            @click="$store.dispatch('saveItem', item.columns);"
+                                            @click="$store.dispatch('saveItem', item);"
                                         />
                                         &nbsp;
                                         <v-icon
@@ -34,7 +34,7 @@
                                             data-bs-target="#modalAdminDelete"
                                             icon="mdi-delete"
                                             size="large"
-                                            @click="$store.dispatch('saveItem', item.columns);"
+                                            @click="$store.dispatch('saveItem', item);"
                                         />
                                     </td>
                                 </tr>
