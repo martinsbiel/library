@@ -5,7 +5,7 @@
                 <div class="card">
                     <h4 class="card-header d-flex"><span class="align-self-center">{{ $t('user.manage') }}</span> 
                         <div class="col-3 align-self-center ml-5">
-                            <input class="form-control" type="text" placeholder="Search" v-model="search">
+                            <input class="form-control" type="text" :placeholder="$t('ui.search')" v-model="search">
                         </div>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#modalUserAdd" class="btn btn-dark btn-lg text-white ms-auto">{{ $t('user.add') }}</button></h4>
 
@@ -17,6 +17,9 @@
                             item-value="name"
                             class="elevation-1"
                             :search="search"
+                            :no-data-text="$t('ui.no_data')"
+                            :items-per-page-text="$t('ui.items_per_page')"
+                            :page-text="$t('ui.page_text')"
                         >
                             <template v-slot:item="{ item }">
                                 <tr>

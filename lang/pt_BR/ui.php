@@ -45,4 +45,8 @@ return [
     'new_pass' => 'Nova senha',
     'confirm_pass' => 'Confirmar senha',
     'confirm_new_pass' => 'Confirmar nova senha',
+    'search' => 'Buscar',
+    'no_data' => 'Nenhum registro encontrado',
+    'items_per_page' => 'Registros por página:',
+    'page_text' => '{0}-{1} de {2}',
 ];

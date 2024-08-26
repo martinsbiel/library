@@ -45,4 +45,8 @@ return [
     'new_pass' => 'New password',
     'confirm_pass' => 'Confirm password',
     'confirm_new_pass' => 'Confirm new password',
+    'search' => 'Search',
+    'no_data' => 'No data available',
+    'items_per_page' => 'Items per page:',
+    'page_text' => '{0}-{1} of {2}',
 ];
