@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\PasswordResetLink;
 use Illuminate\Auth\Passwords\CanResetPassword as PasswordsCanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;  
@@ -13,6 +14,16 @@ use Illuminate\Notifications\Notifiable;
 class Admin extends Authenticatable implements CanResetPassword
 {
     use HasApiTokens, HasFactory, SoftDeletes, Notifiable, PasswordsCanResetPassword;
+
+    /**
+     * Send a password reset notification to the user.
+     *
+     * @param  string  $token
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify(new PasswordResetLink($token));
+    }
 
     /**
      * The attributes that are mass assignable.

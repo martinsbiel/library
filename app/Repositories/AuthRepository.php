@@ -28,7 +28,7 @@ class AuthRepository implements AuthRepositoryInterface
         return $request->user()->currentAccessToken()->delete();
     }
 
-    public function sendPasswordResetLink(array $email): string
+    public function sendPasswordResetLink(array $email): void
     {
         $admin = Admin::where('email', $email)->first();
 
@@ -36,9 +36,9 @@ class AuthRepository implements AuthRepositoryInterface
             throw new \Exception(__('admin.not_found_email'), 404);
         }
 
-        $status = Password::sendResetLink($email);
+        $token = Password::createToken($admin);
 
-        return $status;
+        $admin->sendPasswordResetNotification($token);
     }
 
     public function resetPassword(array $resetDetails): string

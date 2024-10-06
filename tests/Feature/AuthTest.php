@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Admin;
+use App\Notifications\PasswordResetLink;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Event;
@@ -52,7 +52,7 @@ class AuthTest extends TestCase
 
         $response = $this->postJson(route('auth.send-password-reset-link'), ['email' => $admin->email]);
         $response->assertStatus(200);
-        Notification::assertSentTo($admin, ResetPassword::class);
+        Notification::assertSentTo($admin, PasswordResetLink::class);
     }
 
     public function test_admin_can_reset_they_password(): void
