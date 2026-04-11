@@ -89,7 +89,7 @@ const store = createStore({
     state: {
         item: {},
         isAuthenticated: false,
-        locale: '',
+        locale: 'pt_BR',
         user: []
     },
     actions: {
