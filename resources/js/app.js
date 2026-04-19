@@ -9,7 +9,7 @@ import { createApp } from 'vue';
 import * as VueRouter from 'vue-router';
 import vuetify from './plugins/vuetify';
 import moment from 'moment';
-import { i18nVue, loadLanguageAsync } from 'laravel-vue-i18n';
+import { i18nVue } from 'laravel-vue-i18n';
 
 import Home from './views/Home.vue';
 import Login from './views/Login.vue';
